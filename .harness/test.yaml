@@ -1,0 +1,38 @@
+pipeline:
+  name: test
+  identifier: test
+  projectIdentifier: Test1
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: ghc
+        repoName: terraform
+        build: <+input>
+  stages:
+    - stage:
+        name: TF Stage
+        identifier: TF_Stage
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Run_1
+                  identifier: Run_1
+                  spec:
+                    shell: Sh
+                    command: |-
+                      cd terraform-aws/aws-ec2-instances
+                      terraform init
+                      terraform plan
