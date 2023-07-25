@@ -12,6 +12,26 @@ pipeline:
         build: <+input>
   stages:
     - stage:
+        name: Install Delegate
+        identifier: Install_Delegate
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Harness Delegate
+                  identifier: Harness_Delegate
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: registry.hub.docker.com/library/nginx
+                    shell: Sh
+                    command: |-
+                      terraform init
+                      terraform apply
+    - stage:
         name: Terraform
         identifier: Terraform
         description: ""
