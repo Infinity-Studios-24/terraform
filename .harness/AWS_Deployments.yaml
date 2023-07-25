@@ -1,0 +1,38 @@
+pipeline:
+  name: AWS Deployments
+  identifier: AWS_Deployments
+  projectIdentifier: Demo_Project
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: Github_Connector
+        repoName: terraform
+        build: <+input>
+  stages:
+    - stage:
+        name: Terraform Ops
+        identifier: Terraform_Ops
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Docker
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Terraform
+                  identifier: Terraform
+                  spec:
+                    shell: Sh
+                    command: |-
+                      cd aws-ec2-instances
+                      terraform init
+                      terraform plan
