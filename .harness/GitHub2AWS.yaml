@@ -1,0 +1,39 @@
+pipeline:
+  name: GitHub2AWS
+  identifier: GitHub2AWS
+  projectIdentifier: Github2AWS
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: Github2Harness
+        repoName: terraform
+        build: <+input>
+  stages:
+    - stage:
+        name: Terraform
+        identifier: Terraform
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: TerraformOps
+                  identifier: TerraformOps
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: registry.hub.docker.com/library/nginx
+                    shell: Sh
+                    command: |-
+                      terraform init
+                      terraform plan
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Docker
+            spec: {}
