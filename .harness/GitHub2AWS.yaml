@@ -29,6 +29,7 @@ pipeline:
                     image: registry.hub.docker.com/library/nginx
                     shell: Sh
                     command: |-
+                      cd terraform-aws/aws-ec2-instances
                       terraform init
                       terraform apply
     - stage:
