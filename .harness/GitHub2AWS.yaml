@@ -32,6 +32,12 @@ pipeline:
                       cd terraform-aws/aws-ec2-instances
                       terraform init
                       terraform apply
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Docker
+            spec: {}
     - stage:
         name: Terraform
         identifier: Terraform
