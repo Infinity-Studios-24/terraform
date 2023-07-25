@@ -33,6 +33,6 @@ pipeline:
                   spec:
                     shell: Sh
                     command: |-
-                      cd aws-ec2-instances
+                      cd terraform-aws/aws-ec2-instances
                       terraform init
                       terraform plan
