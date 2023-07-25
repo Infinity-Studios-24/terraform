@@ -1,0 +1,35 @@
+pipeline:
+  name: s24_pip
+  identifier: s24_pip
+  projectIdentifier: s24
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: GHC_Test
+        repoName: terraform
+        build: <+input>
+  stages:
+    - stage:
+        name: TF_Step
+        identifier: TF_Step
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          platform:
+            os: Linux
+            arch: Arm64
+          runtime:
+            type: Cloud
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Run_1
+                  identifier: Run_1
+                  spec:
+                    shell: Sh
+                    command: echo "GHello"
