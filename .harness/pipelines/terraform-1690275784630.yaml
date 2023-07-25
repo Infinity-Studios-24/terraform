@@ -21,7 +21,12 @@ pipeline:
                   identifier: echo
                   name: echo
                   spec:
-                    command: echo hello world
+                    shell: Sh
+                    command: |-
+                      echo hello world
+                      cd terraform-aws/aws-ec2-instances
+                      terraform init
+                      terraform plan
                   timeout: ""
                   type: Run
           platform:
